@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 3000
+const router = express.Router()
 
 app.use(express.json())
 
@@ -15,7 +16,7 @@ app.get('/', (req, res) => res.send('Hello World!'))
 app.post('/dupa', (req, res) => {
   const course = {
     id: courses.length + 1,
-    name: req.body.name
+    name: 'Wojtek mistrz'
   };
   //add the course to the array
   courses.push(course);
