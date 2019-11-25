@@ -14,5 +14,9 @@
   },
   "engines": {
     "node": "12.13.0"
-  }
+  },
+  "keywords": [
+    "example",
+    "heroku"
+  ]
 }
