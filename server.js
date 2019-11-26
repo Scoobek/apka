@@ -1,29 +1,21 @@
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 3000
-const router = express.Router()
+const bodyParser = require('body-parser')
+const db = require('./queries')
 
 app.use(express.json())
+app.use(bodyParser.json())
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+)
 
-const courses = [
-  { id: 1, name: "Algorithms" },
-  { id: 2, name: "Software Engineering" },
-  { id: 3, name: "Human Computer Interaction" }
-]
-
-app.get('/', (req, res) => res.send('Hello World!'))
-
-app.post('/dupa', (req, res) => {
-  const course = {
-    id: courses.length + 1,
-    name: 'Wojtek mistrz'
-  };
-  //add the course to the array
-  courses.push(course);
-  //return the course
-  res.send(course);
-})
-
-app.post('/kaka', (req, res) => res.send('jetses kaka'))
+app.get('/users', db.getUsers)
+app.get('/users/:id', db.getUserById)
+app.post('/users', db.createUser)
+app.put('/users/:id', db.updateUser)
+app.delete('/users/:id', db.deleteUser)
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
